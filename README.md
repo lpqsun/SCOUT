@@ -1,16 +1,5 @@
 SCOUT detects vulnerabilities in smart contracts from **opcode-level runtime traces**. It models known vulnerability classes with a CNN–BiLSTM–Attention–GCN network fused with CBOW opcode embeddings, parameter-type embeddings, and statistical features, then detects *unknown* vulnerabilities via an anomaly/OOD scoring scheme (anomaly head combined with a Mahalanobis minimum-distance criterion).
 
-Six vulnerability categories are covered:
-
-| Category | Directory |
-|---|---|
-| Reentrancy | `reentrancy` |
-| Timestamp dependency | `timestamp_dependency` |
-| Balance check (strict equality) | `balance_check` |
-| Block-number dependency | `block_number_dependency` |
-| Integer overflow / underflow | `integer_overflow` |
-| Unchecked external call | `unchecked_external_call` |
-
 ## Repository layout
 
 ```
