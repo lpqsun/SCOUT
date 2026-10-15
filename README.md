@@ -69,7 +69,7 @@ The raw smart-contract source code (Solidity) used to produce these traces is dr
    cd models
    python detect_v4.py
    ```
-
+  
 ## Key files in `models/`
 
 | File | Purpose |
