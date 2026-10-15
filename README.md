@@ -42,31 +42,26 @@ The raw smart-contract source code (Solidity) used to produce these traces is dr
 
 ## Pipeline
 
-1. **(Optional) Generate traces** — instrumented tracing via Hardhat:
-   ```bash
-   cd tracer
-   npm install
-   # One tracer per vulnerability type (scripts/trace_one_*.js);
-   # process_*.sh batch over a dataset dir — set RE_DIR/SRC_DIR to your data.
-   npx hardhat run scripts/trace_one_overflow_v2.js
-   # or, batch:  RE_DIR=/path/to/6_unchecked_external_call_UC ./process_6uc.sh
-   ```
-
-2. **Extract parameter features** for normal traces:
+1. **Extract parameter features** for normal traces:
    ```bash
    python generate_normal_param_features.py
    ```
 
-3. **Clean the dataset** (dedup / drop malformed traces):
+2. **Clean the dataset** (dedup / drop malformed traces):
    ```bash
    python clean_traces.py
    ```
 
-4. **Full pipeline** (vocab → precompute stats → CBOW embeddings → train → detect → evaluate → plots):
+3. **Full pipeline** (vocab → precompute stats → CBOW embeddings → train → detect → evaluate → plots):
    ```bash
    cd models
    python run_experiments.py              # full run
    python run_experiments.py --quick      # smoke test on 1000 samples
+   ```
+4. **6-fold leave-one-category-out cross-validation** (resume-safe):
+   ```bash
+   cd models
+   bash run_cv.sh
    ```
 
 5. **Final detection (V4)** — anomaly OR Mahalanobis min-distance:
